@@ -41,10 +41,25 @@ function SolveSecondPart()
     local start_time = os.clock();
     local solution = 0;
 
+    local left_array = {}
+    local right_map = {}
+
     for line in input_file:lines() do
-        
+        local num1, num2 = SplitString(line, " ")
+        assert(num1 and num2)
+        table.insert(left_array, num1)
+        if right_map[num2] == nil then
+            right_map[num2] = 1
+        else
+            right_map[num2] = right_map[num2] + 1
+        end
     end
     input_file:seek("set", 0);
+
+    for i = 1, #left_array do
+        local multiplier = right_map[left_array[i]] and right_map[left_array[i]] or 0
+        solution = solution + (left_array[i] * multiplier)
+    end
 
     local end_time = os.clock();
     local final_time = end_time - start_time;
