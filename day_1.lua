@@ -16,8 +16,8 @@ function SolveFirstPart()
     
     for line in input_file:lines() do
         local num1, num2 = SplitString(line, " ")
-        table.insert(left_list, num1)
-        table.insert(right_list, num2)
+        table.insert(left_list, tonumber(num1))
+        table.insert(right_list, tonumber(num2))
     end
     input_file:seek("set", 0);
 
@@ -47,11 +47,12 @@ function SolveSecondPart()
     for line in input_file:lines() do
         local num1, num2 = SplitString(line, " ")
         assert(num1 and num2)
-        table.insert(left_array, num1)
-        if right_map[num2] == nil then
-            right_map[num2] = 1
+        table.insert(left_array, tonumber(num1))
+        local num2i = tonumber(num2)
+        if right_map[num2i] == nil then
+            right_map[num2i] = 1
         else
-            right_map[num2] = right_map[num2] + 1
+            right_map[num2i] = right_map[num2i] + 1
         end
     end
     input_file:seek("set", 0);
